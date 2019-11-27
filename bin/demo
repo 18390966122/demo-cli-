@@ -1,0 +1,12 @@
+#!user/bin/env node
+
+const program = require('commander')
+
+// ���嵱ǰ�汾
+// ����ʹ�÷���
+// ����һ��initָ��
+
+program.version(require('../package').version)
+        .usage('<command>[options]')
+        .command('init', 'generate a new project from a template')
+program.parse(process.agrv)

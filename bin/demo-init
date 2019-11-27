@@ -1,0 +1,82 @@
+#!/usr/bin/env node
+const program = require('commander')
+const chalk = require('chalk')
+const download = require('download-git-repo')
+const path = require('path')
+const ora = require('ora')
+const exists = require('fs').existsSync
+const inquirer = require('inquirer')
+const rm = require('rimraf').sync
+
+program.usage('<template-name>[project-name]')
+        .option('-c, --clone', 'use git clone')
+        .option('offline', 'use cached template')
+
+program.on('--help', () => {
+    console.log('   Examples:')
+    console.log()
+    console.log(chalk.gray('   # creat a new project with an official template'))
+    console.log('   $ zws-init webpack my-project')
+    console.log()
+    console.log(chalk.gray('    # create a new project straight from a github template'))
+    console.log('')
+})
+
+function help () {
+    program.parse(process.argv)
+    if (program.args.length < 1) return program.help()
+}
+help()
+
+/**
+*   定义变量
+*/
+// cosnt templateName = program.args[0]
+const porjectName = program.args[1]
+const to = path.resolve(porjectName)
+const clone = program.clone || false
+
+if (!porjectName) {
+    console.log(chalk.red('\n Project should not be empty \n'))
+    return
+}
+
+url = '18390966122/frame'
+console.log(chalk.red('\n Start genenrating... \n'))
+
+console.log()
+process.on('exit', () => {
+    console.log('')
+})
+// 如果当前文件名称存在
+if (exists(to)) {
+    inquirer.prompt([{
+        type: 'confirm',
+        message: 'Target directory exists. Continue?',
+        name: 'ok'
+    }]).then(answers => {
+        if (answers.ok) {
+           downloadTemplate() 
+        }
+    })
+} else {
+    downloadTemplate()
+}
+
+// 下载模板
+function downloadTemplate() {
+    const spinner = ora('downloading template')
+    spinner.start()
+    if (exists(porjectName)) rm(porjectName)
+    download(url, porjectName, { clone }, err => {
+        if (err) {
+            spinner.stop()
+            console.log(chalk.red(`Generation failed. ${err}`))
+            return
+        }
+        spinner.succeed()
+        console.log(chalk.green('\n Generation completed!'))
+        console.log('\n To get started')
+        console.log(`\n cd ${porjectName} \n`)  
+    })
+}

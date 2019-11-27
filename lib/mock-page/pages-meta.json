@@ -1,0 +1,15 @@
+{
+    "schema": {
+      "DeviceType": {
+        "type": "confirm",
+        "required": true,
+        "label": "Do you want generate deviceType modules pages?"
+      },
+      "DeviceList": {
+        "type": "confirm",
+        "required": true,
+        "label": "Do you want generate deviceType modules pages?"
+      }
+    }
+  }
+  

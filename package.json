@@ -1,0 +1,33 @@
+{
+  "name": "demo-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/18390966122/frame.git"
+  },
+  "bin": {
+    "zws": "bin/zws",
+    "zws init": "bin/zws-init"
+  },
+  "keywords": [
+    "demo-cli"
+  ],
+  "author": "sherrie",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/18390966122/frame/issues"
+  },
+  "homepage": "https://github.com/18390966122/frame#readme",
+  "dependencies": {
+    "chalk": "^3.0.0",
+    "commander": "^4.0.1",
+    "download-git-repo": "^3.0.2",
+    "inquirer": "^7.0.0",
+    "ora": "^4.0.3"
+  }
+}
